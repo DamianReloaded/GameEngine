@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="libreload.game" />
+		<Option title="reload_game" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="../../../bin/Debug/reload.game" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../bin/Debug/$(ProjectName)" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="../../../bin/obj/$(ProjectName)/Debug/" />
 				<Option type="2" />
@@ -19,7 +19,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="../../../bin/Release/reload.game" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../bin/Release/$(ProjectName)" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="../../../bin/obj/$(ProjectName)/Release/" />
 				<Option type="2" />
