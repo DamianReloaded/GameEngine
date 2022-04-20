@@ -45,7 +45,7 @@
 			<Add library="GLU" />
 			<Add library="Xrandr" />
 			<Add library="glew" />
-			<Add library="reload_game" />
+			<Add library="reload.game" />
 		</Linker>
 		<Unit filename="../../../data/app.cfg" />
 		<Unit filename="../../source/main.cpp" />
