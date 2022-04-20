@@ -1,7 +1,7 @@
 # GameEngine
 C++ OpenGL Game Engine for Linux / Windows
 
-The idea is to provide with the game most of the libraries required to run it in the hope the binary will "just work" once unpacked.
+The idea is to write a minimalistic framework and to provide most of the libraries required to run a binary in the hope it all will "just work" once unpacked.
 
 - System dependencies
   - X11
