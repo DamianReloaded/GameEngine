@@ -9,5 +9,5 @@ The idea is to provide with the game most of the libraries required to run it in
   - GLU
   - Xrandr
 - Local folder dependencies
-  - Glew
-  - LodePNG
+  - Glew (shared)
+  - LodePNG (compiled in)
