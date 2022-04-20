@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="example.3dgame" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../../bin/Debug/example" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../bin/obj/$(ProjectName)/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add directory="../../../bin/Debug" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="../../../bin/Release/example" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../bin/obj/$(ProjectName)/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add directory="../../../bin/Release" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="../../../dependencies" />
+			<Add directory="../../../reload.game/source" />
+		</Compiler>
+		<Linker>
+			<Add option="-Wl,-R." />
+			<Add library="X11" />
+			<Add library="GL" />
+			<Add library="GLU" />
+			<Add library="Xrandr" />
+			<Add library="glew" />
+			<Add library="../../../bin/Debug/libreload.game.a" />
+		</Linker>
+		<Unit filename="../../../data/app.cfg" />
+		<Unit filename="../../source/main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

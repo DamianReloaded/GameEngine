@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1650287500 source:/home/damian/Coding/github/temp/reload.game/example/project/linux.codeblocks/main.cpp
+	<iostream>
+
+1650428390 source:/home/damian/Coding/github/temp/ReloadGameEngine/example/source/main.cpp
+	<iostream>
+	<string>
+	<typeindex>
+	<glew/glew.h>
+	<reload/config/cfg.h>
+	<reload/format.h>
+	<reload/application.h>
+	<reload/message.h>
+
+1650222061 /home/damian/Coding/github/temp/ReloadGameEngine/dependencies/glew/glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1650222987 /home/damian/Coding/github/temp/ReloadGameEngine/reload.game/source/reload/config/cfg.h
+	<string>
+	<deque>
+	"../error.h"
+
+1650222061 /home/damian/Coding/github/temp/ReloadGameEngine/reload.game/source/reload/error.h
+	<vector>
+	<string>
+
+1650222061 /home/damian/Coding/github/temp/ReloadGameEngine/reload.game/source/reload/format.h
+	<iostream>
+	<iomanip>
+
+1650393068 /home/damian/Coding/github/temp/ReloadGameEngine/reload.game/source/reload/application.h
+	"tasklist.h"
+
+1650382053 /home/damian/Coding/github/temp/ReloadGameEngine/reload.game/source/reload/tasktree.h
+	<deque>
+	"task.h"
+
+1650393243 /home/damian/Coding/github/temp/ReloadGameEngine/reload.game/source/reload/task.h
+	<string_view>
+
+1650393807 /home/damian/Coding/github/temp/ReloadGameEngine/reload.game/source/reload/tasklist.h
+	<deque>
+	"task.h"
+
+1650428375 /home/damian/Coding/github/temp/ReloadGameEngine/reload.game/source/reload/message.h
+	<string>
+	"format.h"
+
