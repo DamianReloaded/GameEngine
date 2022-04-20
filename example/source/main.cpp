@@ -105,6 +105,8 @@ int main()
     if (!file.load("../../../data/app.cfg"))
         cout << reload::format("Can't open cfg file. {i}",12) << endl;
 
+    glewInit();
+
     auto msg = new reload::msg_stop_application();
     msg->text = "hello world";
     reload::imessage* imsg = msg;
