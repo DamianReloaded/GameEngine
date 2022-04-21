@@ -1,0 +1,22 @@
+Event queue dispached every frame to each object
+Message queue 
+
+     Game Loop
+     ---------
+       \- Event Bus
+          \- Push Event
+             \- Event Id (List of Event listeners per Event Id)
+                \- Event Listener
+                   \- Queue // A queue for all Event this object is subscribed to
+ Example:
+ 
+         Frame - Object             - Message  
+         -----   ------               ----------------------------------------------------
+         1     - Player1            - post EV_FIRE_ARROW (ARROW_TYPE, ORIGIN, DESTINATION)
+         1     - Player1            - post EV_NOISE (LOUDNESS, LOCATION)
+         2     - ParticleGenerator  - Read EV_FIRE_ARROW (spawns arrow in trajectory)
+         3     - Enemies            - Read EV_NOISE_EVENT (heads towards the noise if idle)
+         
+MessageBus
+\- Array<Array<EventListener>> (multiple listeners per message Id)
+   \- EventListener->Push(msg) (into each object's queue)

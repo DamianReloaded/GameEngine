@@ -25,9 +25,9 @@ namespace reload {
             {
                 if (!p_task->m_running) return;
                 if (p_task->m_paused) return;
-                p_task->before_update();
+                p_task->update_begin();
                 p_task->update();
-                p_task->after_update();
+                p_task->update_end();
             }
 
             void stop(task<TApp>* p_task)
@@ -41,6 +41,7 @@ namespace reload {
 
             void start(task<TApp>* p_task)
             {
+                if (p_task->index==task<TApp>::invalid_index) return;
                 if (!p_task->m_running)
                 {
                     p_task->m_running = true;

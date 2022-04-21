@@ -5,12 +5,15 @@
 #include <reload/config/cfg.h>
 #include <reload/format.h>
 #include <reload/application.h>
-#include <reload/message.h>
+#include <reload/messages.h>
 using namespace std;
+
 
 class myapp : public reload::application<myapp>
 {
     public:
+        RELOAD_GAME_ID(1000);
+
         myapp()
         {
             std::cout << "myapp created.\n";
@@ -27,11 +30,11 @@ class myapp : public reload::application<myapp>
         {
             std::cout << "myapp stopped.\n";
         }
-        void before_update() override
+        void update_begin() override
         {
             std::cout << "myapp before_update.\n";
         }
-        void after_update() override
+        void update_end() override
         {
             std::cout << "myapp after_update.\n";
         }
@@ -39,6 +42,9 @@ class myapp : public reload::application<myapp>
 
 class mysubtask : public reload::task<myapp>
 {
+public:
+    RELOAD_GAME_ID(1001);
+
     void update() override
     {
         std::cout << "  - mysubtask update" << std::endl;
@@ -51,7 +57,10 @@ class mysubtask : public reload::task<myapp>
 
 class mytask : public reload::task<myapp>
 {
-    public:
+public:
+
+    RELOAD_GAME_ID(1002);
+
     reload::tasklist<myapp>  tasklist;
 
     void created() override
@@ -80,11 +89,11 @@ class mytask : public reload::task<myapp>
     {
         std::cout << "- mytask resumed.\n";
     }
-    void before_update() override
+    void update_begin() override
     {
         std::cout << "- mytask before_update.\n";
     }
-    void after_update() override
+    void update_end() override
     {
         std::cout << "- mytask after_update.\n";
     }
@@ -105,20 +114,12 @@ int main()
     if (!file.load("../../../data/app.cfg"))
         cout << reload::format("Can't open cfg file. {i}",12) << endl;
 
-    glewInit();
-
-    auto msg = new reload::msg_stop_application();
-    msg->text = "hello world";
-    reload::imessage* imsg = msg;
-
-    std::cout  << " "<< reload::msg_stop_application().id() << std::endl;
-    std::cout  << " "<< reload::msg_pause_application().id() << std::endl;
-    std::cout  << " "<< imsg->cast<reload::msg_pause_application>() << std::endl;
-    std::cout  << " "<< imsg->cast<reload::msg_stop_application>() << std::endl;
-
     int retval = 0;
     {
         std::unique_ptr<myapp> app = std::make_unique<myapp>();
+        reload::idregistry registry;
+        registry(myapp::sid);
+        registry(mytask::sid);
         app->tasklist.add<mytask>();
         retval = app->run();
     }

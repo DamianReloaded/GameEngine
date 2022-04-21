@@ -37,16 +37,20 @@
 		<Unit filename="../../../dependencies/lodepng/lodepng.cpp" />
 		<Unit filename="../../../dependencies/lodepng/lodepng.h" />
 		<Unit filename="../../source/reload/application.h" />
+		<Unit filename="../../source/reload/assert.h" />
 		<Unit filename="../../source/reload/config/cfg.cpp" />
 		<Unit filename="../../source/reload/config/cfg.h" />
 		<Unit filename="../../source/reload/error.cpp" />
 		<Unit filename="../../source/reload/error.h" />
 		<Unit filename="../../source/reload/format.h" />
+		<Unit filename="../../source/reload/identifiable.h" />
 		<Unit filename="../../source/reload/io/memfile.cpp" />
 		<Unit filename="../../source/reload/io/memfile.h" />
 		<Unit filename="../../source/reload/message.h" />
 		<Unit filename="../../source/reload/messagebus.h" />
 		<Unit filename="../../source/reload/messages.h" />
+		<Unit filename="../../source/reload/service.h" />
+		<Unit filename="../../source/reload/squeue.h" />
 		<Unit filename="../../source/reload/task.h" />
 		<Unit filename="../../source/reload/tasklist.h" />
 		<Extensions />

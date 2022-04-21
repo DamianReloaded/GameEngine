@@ -1,14 +1,15 @@
 #pragma once
+#include "service.h"
 #include "tasklist.h"
+#include "messagebus.h"
+#include "assert.h"
 namespace reload {
 
     template <class TApp>
-    class application
+    class application : public service
     {
         public:
             application()
-            : m_running(false)
-            , m_paused(false)
             {
                 tasklist.app((TApp*)this);
             }
@@ -35,13 +36,21 @@ namespace reload {
             {
             }
 
-            virtual void before_update()
+            virtual void created()
+            {
+            }
+
+            virtual void destroyed()
+            {
+            }
+
+            virtual void update_begin()
             {
             }
             virtual void update()
             {
             }
-            virtual void after_update()
+            virtual void update_end()
             {
             }
 
@@ -53,15 +62,20 @@ namespace reload {
                 {
                     if (!m_paused)
                     {
-                        before_update();
+                        update_begin();
                         update();
                         tasklist.update();
-                        after_update();
+                        update_end();
                     }
                 }
                 tasklist.terminate();
                 stopped();
                 return 0;
+            }
+
+            void start()
+            {
+                m_running = true;
             }
 
             void pause()
@@ -85,9 +99,9 @@ namespace reload {
 
             reload::tasklist<TApp>  tasklist;
 
+            messagebus messages;
+
         protected:
-            bool                    m_running;
-            bool                    m_paused;
     };
 }
 
