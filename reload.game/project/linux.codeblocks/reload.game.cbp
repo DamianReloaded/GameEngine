@@ -34,12 +34,20 @@
 				</Linker>
 			</Target>
 		</Build>
+		<Compiler>
+			<Add directory="../../source/platform/linux" />
+			<Add directory="../../../dependencies" />
+		</Compiler>
 		<Unit filename="../../../dependencies/lodepng/lodepng.cpp" />
 		<Unit filename="../../../dependencies/lodepng/lodepng.h" />
+		<Unit filename="../../source/platform/linux/reload/implementation/display.cpp" />
+		<Unit filename="../../source/platform/linux/reload/implementation/display.h" />
 		<Unit filename="../../source/reload/application.h" />
 		<Unit filename="../../source/reload/assert.h" />
 		<Unit filename="../../source/reload/config/cfg.cpp" />
 		<Unit filename="../../source/reload/config/cfg.h" />
+		<Unit filename="../../source/reload/display.cpp" />
+		<Unit filename="../../source/reload/display.h" />
 		<Unit filename="../../source/reload/error.cpp" />
 		<Unit filename="../../source/reload/error.h" />
 		<Unit filename="../../source/reload/format.h" />

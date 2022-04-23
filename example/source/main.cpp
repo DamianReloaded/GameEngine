@@ -6,6 +6,7 @@
 #include <reload/format.h>
 #include <reload/application.h>
 #include <reload/messages.h>
+
 using namespace std;
 
 
@@ -13,6 +14,8 @@ class myapp : public reload::application<myapp>
 {
     public:
         RELOAD_GAME_ID(1000);
+
+
 
         myapp()
         {
@@ -22,19 +25,24 @@ class myapp : public reload::application<myapp>
         {
             std::cout << "myapp deleted.\n";
         }
-        void started() override
+        void on_start() override
         {
+            application::on_start();
             std::cout << "myapp started.\n";
+
         }
-        void stopped() override
+        void on_stop() override
         {
+            application::on_stop();
             std::cout << "myapp stopped.\n";
+
         }
-        void update_begin() override
+
+        void on_update_start() override
         {
             std::cout << "myapp before_update.\n";
         }
-        void update_end() override
+        void on_update_end() override
         {
             std::cout << "myapp after_update.\n";
         }
@@ -45,11 +53,11 @@ class mysubtask : public reload::task<myapp>
 public:
     RELOAD_GAME_ID(1001);
 
-    void update() override
+    void on_update() override
     {
         std::cout << "  - mysubtask update" << std::endl;
     }
-    void destroyed() override
+    void on_destroy() override
     {
         std::cout << "  - mysubtask destroyed.\n";
     }
@@ -63,48 +71,48 @@ public:
 
     reload::tasklist<myapp>  tasklist;
 
-    void created() override
+    void on_create() override
     {
         std::cout << "- mytask created.\n";
     }
-    void destroyed() override
+    void on_destroy() override
     {
         std::cout << "- mytask destroyed.\n";
     }
-    void started() override
+    void on_start() override
     {
         tasklist.app(app());
         tasklist.add<mysubtask>();
         std::cout << "- mytask started.\n";
     }
-    void stopped() override
+    void on_stop() override
     {
         std::cout << "- mytask stopped.\n";
     }
-    void paused() override
+    void on_pause() override
     {
         std::cout << "- mytask paused.\n";
     }
-    void resumed() override
+    void on_resume() override
     {
         std::cout << "- mytask resumed.\n";
     }
-    void update_begin() override
+    void on_update_start() override
     {
         std::cout << "- mytask before_update.\n";
     }
-    void update_end() override
+    void on_update_end() override
     {
         std::cout << "- mytask after_update.\n";
     }
-    void update() override
+    void on_update() override
     {
         std::cout << "- mytask update" << std::endl;
         tasklist.update();
         parent()->pause(this);
         parent()->resume(this);
-        parent()->remove(this);
-        app()->stop();
+        //parent()->remove(this);
+        //app()->stop();
     }
 };
 

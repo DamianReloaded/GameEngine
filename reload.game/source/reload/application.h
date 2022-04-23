@@ -3,6 +3,7 @@
 #include "tasklist.h"
 #include "messagebus.h"
 #include "assert.h"
+#include "display.h"
 namespace reload {
 
     template <class TApp>
@@ -18,89 +19,45 @@ namespace reload {
             {
             }
 
-            virtual void started()
+            virtual void on_start() override
             {
+                display.event.closed = [this](){stop();};
+                display.start();
                 tasklist.start_all();
             }
 
-            virtual void stopped()
+            virtual void on_stop() override
             {
                 tasklist.stop_all();
+                display.stop();
             }
 
-            virtual void paused()
+            virtual void on_pause() override
             {
+                tasklist.pause_all();
             }
 
-            virtual void resumed()
+            virtual void on_resume() override
             {
+                tasklist.resume_all();
             }
 
-            virtual void created()
+            virtual void on_update () override
             {
+                display.update();
+                tasklist.update();
+                display.swap_buffers();
             }
 
-            virtual void destroyed()
+            virtual void on_destroy() override
             {
-            }
-
-            virtual void update_begin()
-            {
-            }
-            virtual void update()
-            {
-            }
-            virtual void update_end()
-            {
-            }
-
-            int run ()
-            {
-                started();
-                m_running = true;
-                while (m_running)
-                {
-                    if (!m_paused)
-                    {
-                        update_begin();
-                        update();
-                        tasklist.update();
-                        update_end();
-                    }
-                }
                 tasklist.terminate();
-                stopped();
-                return 0;
             }
-
-            void start()
-            {
-                m_running = true;
-            }
-
-            void pause()
-            {
-                m_paused = true;
-                paused();
-            }
-
-            void resume()
-            {
-                m_paused = false;
-                resumed();
-            }
-
-            void stop()
-            {
-                m_running = false;
-            }
-
-            bool running () { return m_running; }
 
             reload::tasklist<TApp>  tasklist;
 
-            messagebus messages;
-
+            messagebus      messages;
+            reload::display display;
         protected:
     };
 }

@@ -25,9 +25,7 @@ namespace reload {
             {
                 if (!p_task->m_running) return;
                 if (p_task->m_paused) return;
-                p_task->update_begin();
                 p_task->update();
-                p_task->update_end();
             }
 
             void stop(task<TApp>* p_task)
@@ -35,7 +33,7 @@ namespace reload {
                 if (p_task->m_running)
                 {
                     p_task->m_running = false;
-                    p_task->stopped();
+                    p_task->on_stop();
                 }
             }
 
@@ -45,7 +43,7 @@ namespace reload {
                 if (!p_task->m_running)
                 {
                     p_task->m_running = true;
-                    p_task->started();
+                    p_task->on_start();
                 }
             }
 
@@ -57,6 +55,16 @@ namespace reload {
             void start_all()
             {
                 for (auto t : tasks) stop(t);
+            }
+
+            void pause_all()
+            {
+                for (auto t : tasks) pause(t);
+            }
+
+            void resume_all()
+            {
+                for (auto t : tasks) resume(t);
             }
 
             virtual void update ()
@@ -83,13 +91,13 @@ namespace reload {
             void pause(task<TApp>* p_task)
             {
                 p_task->m_paused=true;
-                p_task->paused();
+                p_task->on_pause();
             }
 
             void resume(task<TApp>* p_task)
             {
                 p_task->m_paused=false;
-                p_task->resumed();
+                p_task->on_resume();
             }
 
             void app (TApp* p_app)
@@ -133,7 +141,7 @@ namespace reload {
                 {
                     tasks.push_back(t);
                     t->index = tasks.size()-1;
-                    t->created();
+                    t->on_create();
                     start(t);
                     update_task(t);
                 }
@@ -144,7 +152,7 @@ namespace reload {
             {
                 stop(p_task);
                 p_container.erase(p_container.begin()+p_task->index);
-                p_task->destroyed();
+                p_task->on_destroy();
                 delete p_task;
             }
 
