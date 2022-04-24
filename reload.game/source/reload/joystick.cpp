@@ -107,6 +107,8 @@ namespace reload
                             devices.back().id = js;
                             devices.back().name = entry.path();
                             had_at_least_one_device = true;
+                            reinit_retry_attempts_count = 0;
+                            reinit_retry_interval_count = 0;
                         }
                     }
                 }
@@ -142,8 +144,6 @@ namespace reload
                     default:
                         break;
                 }
-
-                fflush(stdout);
             }
             device_error = device_error || (errno==ENODEV);
         }
@@ -151,8 +151,12 @@ namespace reload
         // try to reconnect to device. This could be better.
         if ( (device_error || devices.size()==0) && had_at_least_one_device )
         {
-            static int count = 0;
-            printf("%i\n",count);
+            if (reinit_retry_attempts_count>reinit_retry_max_attempts) return;
+            reinit_retry_interval_count++;
+            if (reinit_retry_interval_count<reinit_retry_interval) return;
+            reinit_retry_attempts_count++;
+            printf("Joystic device error. Atempting reinitialization...\n");
+            reinit_retry_interval_count = 0;
             initialize();
             return;
         }

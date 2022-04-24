@@ -30,6 +30,10 @@ namespace reload {
             void                    update          ();
 
             std::list<device>       devices;
+            int                     reinit_retry_attempts_count=0;
+            int                     reinit_retry_max_attempts=50;
+            int                     reinit_retry_interval = 100;
+            int                     reinit_retry_interval_count = 0;
 
             struct
             {
@@ -39,6 +43,7 @@ namespace reload {
 
         protected:
             bool                    had_at_least_one_device;
+
     };
 }
 
