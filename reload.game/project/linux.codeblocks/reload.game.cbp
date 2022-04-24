@@ -54,11 +54,14 @@
 		<Unit filename="../../source/reload/identifiable.h" />
 		<Unit filename="../../source/reload/io/memfile.cpp" />
 		<Unit filename="../../source/reload/io/memfile.h" />
+		<Unit filename="../../source/reload/joystick.cpp" />
+		<Unit filename="../../source/reload/joystick.h" />
 		<Unit filename="../../source/reload/message.h" />
 		<Unit filename="../../source/reload/messagebus.h" />
 		<Unit filename="../../source/reload/messages.h" />
 		<Unit filename="../../source/reload/service.h" />
 		<Unit filename="../../source/reload/squeue.h" />
+		<Unit filename="../../source/reload/string.h" />
 		<Unit filename="../../source/reload/task.h" />
 		<Unit filename="../../source/reload/tasklist.h" />
 		<Extensions />

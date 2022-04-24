@@ -21,8 +21,28 @@ namespace reload {
 
             struct
             {
-                typedef std::function<void()>   void_function;
-                void_function                   closed;
+                typedef std::function<void()> ev_default;
+
+                struct
+                {
+                    typedef std::function<void(uint32_t,bool)> ev_key;
+                    typedef std::function<void(const std::string&)> ev_text;
+                    ev_key     key;
+                    ev_text    text;
+                } keyboard;
+                struct
+                {
+                    typedef std::function<void(uint32_t,bool)> ev_button;
+                    typedef std::function<void(int32_t,int32_t)> ev_move;
+                    ev_button   button;
+                    ev_move     move;
+                } pointer;
+
+                struct
+                {
+                    ev_default          close;
+                } window;
+
             } event;
         protected:
             class           implementation;

@@ -32,6 +32,8 @@ namespace reload {
             GLXContext              context;
             XSetWindowAttributes    attributes;
             XVisualInfo*            visualinfo;
+            XIC                     xic;
+            XIM                     xim;
             int                     xoffset;
             int                     yoffset;
             int                     width;
@@ -43,6 +45,10 @@ namespace reload {
             std::vector<int>        attributelist;
             std::deque<resource>    resources;
             size_t                  resource;
+            uint8_t                 key_state[256];
+            bool                    disable_control_key_modifier;
+            bool                    disable_autorepeat_key_release;
+            bool                    disable_autorepeat_key_press;
     };
 }
 

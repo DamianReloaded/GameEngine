@@ -1,5 +1,7 @@
 #include "display.h"
 #include <cstring>
+#include <X11/XKBlib.h>
+
 namespace reload
 {
     Atom display::implementation::wmdelete;
@@ -13,6 +15,9 @@ namespace reload
         height = 768;
         fullscreen = false;
         resource = 0;
+        disable_control_key_modifier = true;
+        disable_autorepeat_key_release = true;
+        disable_autorepeat_key_press = true;
         inputmask = FocusChangeMask | ButtonPressMask | ButtonReleaseMask   | ButtonMotionMask | PointerMotionMask |
                     KeyPressMask    | KeyReleaseMask  | StructureNotifyMask | EnterWindowMask  | LeaveWindowMask;
 
@@ -88,14 +93,26 @@ namespace reload
         XGetGeometry(display, window, &dummywindow, &x, &y, (unsigned int*)&width, (unsigned int*)&height, &dummyborder, &depth);
 
         if (glXIsDirect(display, context)) {} //do something
-        XSelectInput(display, window, inputmask);
         glewInit();
 
+        XIM xim = XOpenIM(display, 0, 0, 0);
+        if(!xim){
+            XSetLocaleModifiers("@im=none");
+            xim = XOpenIM(display, 0, 0, 0);
+        }
+        xic = XCreateIC(xim,
+                        XNInputStyle,   XIMPreeditNothing | XIMStatusNothing,
+                        XNClientWindow, window,
+                        XNFocusWindow,  window,
+                        NULL);
+
+        XSelectInput(display, window, inputmask);
         return true;
     }
 
     void display::implementation::process_events()
     {
+        if (display==nullptr) return;
         XEvent xevent;
         while (XPending(display))
         {
@@ -107,7 +124,7 @@ namespace reload
                 {
                     if ((Atom)xevent.xclient.data.l[0] == wmdelete)
                     {
-                        if (m_display->event.closed!=nullptr) m_display->event.closed();
+                        if (m_display->event.window.close!=nullptr) m_display->event.window.close();
                     }
                 }
                 break;
@@ -126,12 +143,62 @@ namespace reload
 
                 case ButtonPress:
                 {
-                    switch(xevent.xbutton.button)
-                    {
-                        case 1: m_display->event.closed(); break;
-                    }
+                    if(m_display->event.pointer.button!=nullptr) m_display->event.pointer.button(xevent.xbutton.button, true);
                 }
                 break;
+
+                case ButtonRelease:
+                {
+                    if(m_display->event.pointer.button!=nullptr) m_display->event.pointer.button(xevent.xbutton.button, false);
+                }
+                break;
+
+                case MotionNotify:
+                {
+                    if(m_display->event.pointer.move!=nullptr) m_display->event.pointer.move(xevent.xmotion.x, xevent.xmotion.y);
+                }
+                break;
+
+                case KeyPress:
+                {
+                    if (disable_control_key_modifier) xevent.xkey.state &= ~ControlMask;
+                    if (disable_autorepeat_key_release && xevent.xkey.keycode<256 && key_state[xevent.xkey.keycode]) return; // ignore keypress autorepeat
+                    key_state[xevent.xkey.keycode] = true;
+
+                    if (m_display->event.keyboard.text != nullptr)
+                    {
+                        Status status;
+                        KeySym keysym = NoSymbol;
+                        char text[32] = {};
+                        int length = Xutf8LookupString(xic, &xevent.xkey, text, sizeof(text) - 1, &keysym, &status);
+                        if( length>0 )
+                        {
+                            std::string str = std::string(text);
+                            if(m_display->event.keyboard.text!=nullptr) m_display->event.keyboard.text(str);
+                        }
+                    }
+
+                    if (m_display->event.keyboard.key!=nullptr) m_display->event.keyboard.key(xevent.xkey.keycode, true);
+                }
+                break;
+
+                case KeyRelease:
+                {
+                    if (disable_autorepeat_key_release && XEventsQueued(display, QueuedAfterReading))
+                    {
+                        XEvent nev;
+                        XPeekEvent(display, &nev);
+                        if (nev.type == KeyPress && nev.xkey.time == xevent.xkey.time && nev.xkey.keycode == xevent.xkey.keycode)
+                        {
+                            return; // discard this event
+                        }
+                    }
+
+                    key_state[xevent.xkey.keycode] = false;
+                    if (m_display->event.keyboard.key!=nullptr) m_display->event.keyboard.key(xevent.xkey.keycode, false);
+                }
+                break;
+
             }
         }
     }
