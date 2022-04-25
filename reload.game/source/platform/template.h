@@ -1,6 +1,7 @@
 #pragma once
-namespace reload::implementation {
-    class classname
+#include "../../../../reload/classname.h"
+namespace reload {
+    class classname::implementation
     {
         public:
                         classname();

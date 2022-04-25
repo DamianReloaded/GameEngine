@@ -30,7 +30,7 @@ namespace reload {
         }
     };
 
-    #define RELOAD_GAME_ID(idvalue) static constexpr size_t sid = idvalue; size_t id() const { return sid; }
+    #define RELOAD_GAME_DECLARE_ID(idvalue) static constexpr size_t sid = idvalue; size_t id() const { return sid; }
 
 }
 

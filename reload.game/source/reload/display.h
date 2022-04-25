@@ -5,7 +5,7 @@ namespace reload {
     class display : public service
     {
         public:
-            RELOAD_GAME_ID(20);
+            RELOAD_GAME_DECLARE_ID(20);
 
                         display();
             virtual     ~display();

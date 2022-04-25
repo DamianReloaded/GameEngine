@@ -11,7 +11,7 @@ namespace reload
 {
     static constexpr int JOYSTICK_MAX_AXES = 10;
 
-    joystick::joystick(const std::string p_message)
+    joystick::joystick()
     {
         had_at_least_one_device = false;
     }

@@ -14,7 +14,7 @@ using namespace std;
 class myapp : public reload::application
 {
     public:
-        RELOAD_GAME_ID(1000);
+        RELOAD_GAME_DECLARE_ID(1000);
 
         reload::display         display;
         reload::joystick        joystick;
@@ -109,7 +109,7 @@ class myapp : public reload::application
 class mysubtask : public reload::task<myapp>
 {
 public:
-    RELOAD_GAME_ID(1001);
+    RELOAD_GAME_DECLARE_ID(1001);
 
     void on_update() override
     {
@@ -125,7 +125,7 @@ class mytask : public reload::task<myapp>
 {
 public:
 
-    RELOAD_GAME_ID(1002);
+    RELOAD_GAME_DECLARE_ID(1002);
 
     reload::tasklist<myapp>  tasklist;
 

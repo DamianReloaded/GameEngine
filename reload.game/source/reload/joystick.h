@@ -23,7 +23,7 @@ namespace reload {
                 } event;
             };
 
-                                    joystick        (const std::string p_message="");
+                                    joystick        ();
             virtual                 ~joystick       ();
 
             void                    initialize      ();

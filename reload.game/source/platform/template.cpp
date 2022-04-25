@@ -1,14 +1,14 @@
 #include "classname.h"
 
-namespace reload::implementation
+namespace reload
 {
 
-    classname::classname()
+    classname::implementation::classname()
     {
         
     }
 
-    classname::~classname()
+    classname::implementation::~classname()
     {
         
     }
