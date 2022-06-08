@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1654713788 source:c:\damian\coding\projects\github\gameengine\example\source\main.cpp
+	<iostream>
+	<string>
+	<typeindex>
+	<reload/config/cfg.h>
+	<reload/format.h>
+	<reload/application.h>
+	<reload/messages.h>
+	<reload/display.h>
+	<reload/joystick.h>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\config\cfg.h
+	<string>
+	<deque>
+	"../error.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\error.h
+	<vector>
+	<string>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\format.h
+	<iostream>
+	<iomanip>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\application.h
+	"service.h"
+	"tasklist.h"
+	"messagebus.h"
+	"assert.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\service.h
+	"identifiable.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\identifiable.h
+	<set>
+	"assert.h"
+
+1654372391 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\assert.h
+	<cassert>
+	<stdio.h>
+	"format.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\tasklist.h
+	<deque>
+	"task.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\task.h
+	<string_view>
+	"service.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\messagebus.h
+	"squeue.h"
+	"message.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\squeue.h
+	<assert.h>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\message.h
+	"identifiable.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\messages.h
+	"message.h"
+
+1654713049 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\display.h
+	"service.h"
+	"geometry.h"
+	<functional>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\joystick.h
+	<list>
+	<string>
+	<functional>
+
+1654702686 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\geometry.h
+

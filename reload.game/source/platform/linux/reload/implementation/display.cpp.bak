@@ -14,7 +14,7 @@ namespace reload
         width = 1024;
         height = 768;
         fullscreen = false;
-        current_video_mode = 0;
+        resource = 0;
         disable_control_key_modifier = true;
         disable_autorepeat_key_release = true;
         disable_autorepeat_key_press = true;
@@ -49,7 +49,7 @@ namespace reload
             visualinfo = glXChooseVisual(display, screen, &attributelist[0]);
         }
 
-        query_video_modes();
+        query_resources();
 
         glXQueryVersion(display, &glx_major_version, &glx_minor_version);
 
@@ -63,7 +63,7 @@ namespace reload
         {
             attributes.override_redirect = True;
             window = XCreateWindow(display, RootWindow(display, visualinfo->screen),
-                                   video_modes[current_video_mode].x, video_modes[current_video_mode].y, video_modes[current_video_mode].width, video_modes[current_video_mode].height,
+                                   resources[resource].x, resources[resource].y, resources[resource].width, resources[resource].height,
                                    0, visualinfo->depth, InputOutput, visualinfo->visual,
                                    CWBorderPixel | CWColormap | CWEventMask | CWOverrideRedirect, &attributes);
             XWarpPointer(display, None, window, 0,0,0,0,0,0);
@@ -74,7 +74,7 @@ namespace reload
         else
         {
             window = XCreateWindow(display, RootWindow(display, visualinfo->screen),
-                                   0, 0, video_modes[current_video_mode].width, video_modes[current_video_mode].height,
+                                   0, 0, resources[resource].width, resources[resource].height,
                                    0, visualinfo->depth, InputOutput, visualinfo->visual,
                                    CWBorderPixel | CWColormap | CWEventMask, &attributes);
             XSetStandardProperties(display, window, "title", "title2", None, NULL, 0, NULL);
@@ -217,9 +217,9 @@ namespace reload
     }
 
 
-    void display::implementation::query_video_modes()
+    void display::implementation::query_resources()
     {
-        video_modes.clear();
+        resources.clear();
         XRRScreenResources* res = XRRGetScreenResources(display, RootWindow(display,visualinfo->screen));
         for (int i=0; i<res->noutput; i++)
         {
@@ -227,31 +227,31 @@ namespace reload
             for (int c=0; c<info->ncrtc; c++)
             {
                 auto crtcinfo = XRRGetCrtcInfo(display, res, res->crtcs[c]);
-                store_video_mode(crtcinfo->x, crtcinfo->y, crtcinfo->width, crtcinfo->height, crtcinfo->rotation);
+                store_resource(crtcinfo->x, crtcinfo->y, crtcinfo->width, crtcinfo->height, crtcinfo->rotation);
                 XRRFreeCrtcInfo(crtcinfo);
             }
             XRRFreeOutputInfo(info);
         }
-        if (current_video_mode>video_modes.size()-1) current_video_mode = 0;
+        if (resource>resources.size()-1) resource = 0;
     }
 
-    void display::implementation::store_video_mode(int p_x, int p_y, int p_w, int p_h, int p_rotation)
+    void display::implementation::store_resource(int p_x, int p_y, int p_w, int p_h, int p_rotation)
     {
         if (p_w<1 || p_h<1) return;
-        for (size_t i=0; i<video_modes.size(); i++)
+        for (size_t i=0; i<resources.size(); i++)
         {
-            if (video_modes[i].x == p_x && video_modes[i].y == p_y && video_modes[i].width == p_w && video_modes[i].height == p_h && video_modes[i].rotation == p_rotation)
+            if (resources[i].x == p_x && resources[i].y == p_y && resources[i].width == p_w && resources[i].height == p_h && resources[i].rotation == p_rotation)
             {
                 return;
             }
         }
-        video_modes.emplace_back();
-        video_modes.back().x        = p_x;
-        video_modes.back().y        = p_y;
-        video_modes.back().width    = p_w;
-        video_modes.back().height   = p_h;
-        video_modes.back().rotation = p_rotation;
+        resources.resize(resources.size()+1);
+        resources.back().x        = p_x;
+        resources.back().y        = p_y;
+        resources.back().width    = p_w;
+        resources.back().height   = p_h;
+        resources.back().rotation = p_rotation;
 
-        if ( video_modes.back().x == xoffset && video_modes.back().y == yoffset && video_modes.back().width == width && video_modes.back().height == height ) video_mode = video_modes.size()-1;
+        if ( resources.back().x == xoffset && resources.back().y == yoffset && resources.back().width == width && resources.back().height == height ) resource = resources.size()-1;
     }
 }

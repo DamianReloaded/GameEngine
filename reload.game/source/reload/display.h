@@ -1,5 +1,6 @@
 #pragma once
 #include "service.h"
+#include "geometry.h"
 #include <functional>
 namespace reload {
     class display : public service

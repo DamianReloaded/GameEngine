@@ -1,12 +1,13 @@
 #pragma once
 #include <cassert>
-#include <execinfo.h>
+//#include <execinfo.h>
 #include <stdio.h>
 #include "format.h"
 namespace reload {
 
     static inline void print_backtrace()
     {
+/*
         char **strings;
         size_t i, size;
         enum Constexpr { MAX_SIZE = 1024 };
@@ -17,12 +18,13 @@ namespace reload {
             printf("%s\n", strings[i]);
         puts("");
         free(strings);
+*/
     }
 
     static inline void assert_with_callstack(bool condition, const std::string_view message)
     {
         if (condition) return;
-        print_backtrace();
+        //print_backtrace();
         std::cout << "*** Assertion Failed: " << message << std::endl;
         exit(1);
     }

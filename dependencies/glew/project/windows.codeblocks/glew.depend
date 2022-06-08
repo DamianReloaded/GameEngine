@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1654370142 source:c:\damian\coding\projects\github\gameengine\dependencies\glew\src\glew.cpp
+	<GL/glew.h>
+	<GL/wglew.h>
+	<GL/glxew.h>
+	<dlfcn.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+	<string.h>
+	<AvailabilityMacros.h>
+	<dlfcn.h>
+	<mach-o/dyld.h>
+
+1654370141 c:\damian\coding\projects\github\gameengine\dependencies\glew\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1654370141 c:\damian\coding\projects\github\gameengine\dependencies\glew\include\gl\wglew.h
+	<windows.h>
+
+1654370141 c:\damian\coding\projects\github\gameengine\dependencies\glew\include\gl\glxew.h
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xmd.h>
+	<GL/glew.h>
+

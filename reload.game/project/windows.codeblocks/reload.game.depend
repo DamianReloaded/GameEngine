@@ -1,0 +1,101 @@
+# depslib dependency file v1.0
+1620917121 source:c:\damian\coding\projects\github\gameengine\reload.game\project\windows.codeblocks\main.c
+
+1654370143 source:c:\damian\coding\projects\github\gameengine\reload.game\source\reload\config\cfg.cpp
+	"cfg.h"
+	"../io/memfile.h"
+	"../format.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\config\cfg.h
+	<string>
+	<deque>
+	"../error.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\error.h
+	<vector>
+	<string>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\io\memfile.h
+	<vector>
+	<string>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\format.h
+	<iostream>
+	<iomanip>
+
+1654714450 source:c:\damian\coding\projects\github\gameengine\reload.game\source\platform\windows\reload\implementation\display.cpp
+	"display.h"
+	<cstring>
+	<dependencies/glew/glew.h>
+	<dependencies/glew/wglew.h>
+
+1654714242 c:\damian\coding\projects\github\gameengine\reload.game\source\platform\windows\reload\implementation\display.h
+	"../../../../reload/display.h"
+	<windows.h>
+	<vector>
+	<deque>
+
+1654713049 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\display.h
+	"service.h"
+	"geometry.h"
+	<functional>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\service.h
+	"identifiable.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\identifiable.h
+	<set>
+	"assert.h"
+
+1654372391 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\assert.h
+	<cassert>
+	<stdio.h>
+	"format.h"
+
+1654370143 source:c:\damian\coding\projects\github\gameengine\reload.game\source\platform\windows\reload\implementation\sound.cpp
+	"sound.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\platform\windows\reload\implementation\sound.h
+	"../../../../reload/sound.h"
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\sound.h
+	"service.h"
+	<functional>
+
+1654713049 source:c:\damian\coding\projects\github\gameengine\reload.game\source\reload\display.cpp
+	<reload/implementation/display.h>
+
+1654370143 source:c:\damian\coding\projects\github\gameengine\reload.game\source\reload\error.cpp
+	"error.h"
+
+1654370143 source:c:\damian\coding\projects\github\gameengine\reload.game\source\reload\io\memfile.cpp
+	"memfile.h"
+	<sstream>
+	<fstream>
+	<iterator>
+
+1654374843 source:c:\damian\coding\projects\github\gameengine\reload.game\source\reload\joystick.cpp
+	"joystick.h"
+	<string>
+
+1654370143 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\joystick.h
+	<list>
+	<string>
+	<functional>
+
+1654370143 source:c:\damian\coding\projects\github\gameengine\reload.game\source\reload\sound.cpp
+	<reload/implementation/sound.h>
+
+1654702686 c:\damian\coding\projects\github\gameengine\reload.game\source\reload\geometry.h
+
+1654370141 c:\damian\coding\projects\github\gameengine\dependencies\glew\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1654370142 c:\damian\coding\projects\github\gameengine\dependencies\glew\wglew.h
+	<windows.h>
+

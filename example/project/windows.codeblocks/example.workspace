@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="example.cbp">
+			<Depends filename="../../../reload.game/project/windows.codeblocks/reload.game.cbp" />
+		</Project>
+		<Project filename="../../../reload.game/project/windows.codeblocks/reload.game.cbp">
+			<Depends filename="../../../dependencies/glew/project/windows.codeblocks/glew.cbp" />
+		</Project>
+		<Project filename="../../../dependencies/glew/project/windows.codeblocks/glew.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

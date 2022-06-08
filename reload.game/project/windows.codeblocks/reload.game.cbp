@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="reload.game" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../../../bin/Debug/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="../../../../bin/obj/lib$(PROJECT_NAME)/Debug/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="../../../../bin/Release/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="../../../../bin/obj/lib$(PROJECT_NAME)/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="../../source/platform/windows" />
+			<Add directory="../../../../GameEngine" />
+		</Compiler>
+		<Unit filename="../../source/platform/windows/reload/implementation/display.cpp" />
+		<Unit filename="../../source/platform/windows/reload/implementation/display.h" />
+		<Unit filename="../../source/platform/windows/reload/implementation/sound.cpp" />
+		<Unit filename="../../source/platform/windows/reload/implementation/sound.h" />
+		<Unit filename="../../source/reload/application.h" />
+		<Unit filename="../../source/reload/assert.h" />
+		<Unit filename="../../source/reload/config/cfg.cpp" />
+		<Unit filename="../../source/reload/config/cfg.h" />
+		<Unit filename="../../source/reload/display.cpp" />
+		<Unit filename="../../source/reload/display.h" />
+		<Unit filename="../../source/reload/error.cpp" />
+		<Unit filename="../../source/reload/error.h" />
+		<Unit filename="../../source/reload/format.h" />
+		<Unit filename="../../source/reload/geometry.h" />
+		<Unit filename="../../source/reload/identifiable.h" />
+		<Unit filename="../../source/reload/io/memfile.cpp" />
+		<Unit filename="../../source/reload/io/memfile.h" />
+		<Unit filename="../../source/reload/joystick.cpp" />
+		<Unit filename="../../source/reload/joystick.h" />
+		<Unit filename="../../source/reload/message.h" />
+		<Unit filename="../../source/reload/messagebus.h" />
+		<Unit filename="../../source/reload/messages.h" />
+		<Unit filename="../../source/reload/service.h" />
+		<Unit filename="../../source/reload/sound.cpp" />
+		<Unit filename="../../source/reload/sound.h" />
+		<Unit filename="../../source/reload/squeue.h" />
+		<Unit filename="../../source/reload/string.h" />
+		<Unit filename="../../source/reload/task.h" />
+		<Unit filename="../../source/reload/tasklist.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

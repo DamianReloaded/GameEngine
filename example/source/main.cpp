@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <typeindex>
-#include <glew/glew.h>
 #include <reload/config/cfg.h>
 #include <reload/format.h>
 #include <reload/application.h>
@@ -16,13 +15,14 @@ class myapp : public reload::application
     public:
         RELOAD_GAME_DECLARE_ID(1000);
 
-        reload::display         display;
+        std::unique_ptr<reload::display>    display;
         reload::joystick        joystick;
         reload::tasklist<myapp> tasklist;
 
         myapp()
         {
             std::cout << "myapp created.\n";
+            display = std::make_unique<reload::display>();
             tasklist.app((myapp*)this);
         }
         ~myapp()
@@ -37,19 +37,20 @@ class myapp : public reload::application
 
         virtual void open_display()
         {
-            display.event.window.close = [this](){stop();};
-            display.event.keyboard.key = [this](uint32_t key, bool pressed)
+
+            display->event.window.close = [this](){stop();};
+            display->event.keyboard.key = [this](uint32_t key, bool pressed)
             {
                 if (pressed) std::cout << "key press:" <<key <<"\n"; else std::cout << "key release:" <<key <<"\n";
                 if (key==9) stop();
             };
-            display.event.keyboard.text = [this](const std::string& _text){ std::cout << "key text:" <<_text<<"\n"; };
+            display->event.keyboard.text = [this](const std::string& _text){ std::cout << "key text:" <<_text<<"\n"; };
 
 
-            //display.event.pointer.move = [this](int32_t x, int32_t y){ std::cout << "x:" <<x <<",y:"<<y<<"\n"; };
-            display.event.pointer.button = [this](int32_t button, bool pressed){ if (pressed) std::cout <<button << " pressed" <<"\n"; else std::cout << button << " released" <<"\n"; };
+            //display->event.pointer.move = [this](int32_t x, int32_t y){ std::cout << "x:" <<x <<",y:"<<y<<"\n"; };
+            display->event.pointer.button = [this](int32_t button, bool pressed){ if (pressed) std::cout <<button << " pressed" <<"\n"; else std::cout << button << " released" <<"\n"; };
 
-            display.start();
+            display->start();
 
             joystick.event.initialize = [this](reload::joystick* j)
             {
@@ -63,7 +64,7 @@ class myapp : public reload::application
 
         virtual void close_display()
         {
-            display.stop();
+            display->stop();
         }
 
         void on_start() override
@@ -97,12 +98,12 @@ class myapp : public reload::application
         void on_update_start() override
         {
             //std::cout << "myapp before_update.\n";
-            display.update();
+            display->update();
         }
         void on_update_end() override
         {
             //std::cout << "myapp after_update.\n";
-            display.swap_buffers();
+            display->swap_buffers();
         }
 };
 
